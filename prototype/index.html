@@ -959,10 +959,14 @@ function topicWord(){
   return best?best[0]:($("topic").value||"이 주제");
 }
 /* 서버(/api/*) 호출. 서버가 없거나 실패하면 호출한 쪽에서 규칙 기반 대체 동작으로 넘어간다. */
+/* localhost 에서는 내 컴퓨터의 Node 서버(/api/*)를, 배포된 주소(GitHub Pages 등)에서는 Supabase Edge Function 을 부른다. */
+const FN_BASE="https://qvdeoatmgkaxurdfzvna.supabase.co/functions/v1/presentation-ai";
+const LOCAL_HOST=/^(localhost|127\.0\.0\.1)$/.test(location.hostname);
 async function api(path,payload,ms=60000){
   const ctl=new AbortController(), timer=setTimeout(()=>ctl.abort(),ms);
+  const url=LOCAL_HOST?path:FN_BASE+path.replace(/^\/api/,"");
   try{
-    const r=await fetch(path,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(payload),signal:ctl.signal});
+    const r=await fetch(url,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(payload),signal:ctl.signal});
     const d=await r.json().catch(()=>({}));
     if(!r.ok) throw new Error(d.error||("http_"+r.status));
     return d;

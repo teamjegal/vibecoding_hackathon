@@ -32,3 +32,11 @@ npm start                # http://127.0.0.1:3000
 - **시선 분석**: 카메라 영상에서 정면/아래/옆을 추정해 대본만 보지 않는지 판단합니다. 영상은 브라우저 안에서만 처리합니다.
 - **강의실 반응**: 말 속도·정적·군더더기어에 따라 학생과 교수님이 반응합니다(지루함/버벅임/속사포/완벽). 발표 화면의 "강의실 반응 미리보기" 버튼으로 마이크 없이도 볼 수 있습니다.
 - **질의응답·진단**: 교수님 질문에 음성으로 답하고, Claude가 진단합니다.
+
+## 배포 (GitHub Pages + Supabase)
+
+- 화면은 GitHub Pages(`prototype/`), AI는 Supabase Edge Function(`supabase/functions/presentation-ai`)이 맡습니다.
+- 화면은 `localhost`에서 열면 내 컴퓨터의 Node 서버를, 그 밖의 주소에서는 Supabase 함수를 호출합니다.
+- Claude 키는 Supabase 대시보드 **Edge Functions → Secrets**에 `ANTHROPIC_API_KEY`로 저장합니다(저장소에 올리지 않습니다).
+- 허용 주소는 기본 `https://teamjegal.github.io`, `localhost:3000`입니다. 다른 주소를 쓰려면 Secrets에 `ALLOWED_ORIGINS`(쉼표로 구분)를 추가하세요.
+- 함수 프롬프트를 고칠 때는 `server/server.mjs`와 `supabase/functions/presentation-ai/index.ts` 두 곳을 함께 고칩니다.
