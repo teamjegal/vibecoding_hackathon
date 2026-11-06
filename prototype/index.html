@@ -135,12 +135,12 @@ details.demo summary{cursor:pointer;min-height:24px}
 
 /* 강의실 학생/교수님 */
 .sx{position:absolute;left:0;top:0;width:100%;height:100%;transition:transform 1.6s ease-in,opacity 1.2s ease-in}
-.sw{position:absolute;left:0;top:0;width:100%;height:100%;animation:bob 3.4s ease-in-out infinite}
-@keyframes bob{50%{transform:translateY(-2%)}}
-.sh{position:absolute;left:0;top:0;width:100%;height:100%;transform-origin:50% 47%;transition:transform .5s;animation:sway calc(6s + var(--d,0s)*6) ease-in-out infinite;animation-delay:calc(var(--d,0s)*-9)}
-@keyframes sway{0%,100%{rotate:0deg;translate:0 0}28%{rotate:-2.2deg;translate:-1.2% 0}62%{rotate:2.4deg;translate:1.2% 0}}
-.se{transform-origin:center;transition:transform .3s;animation:blink calc(3.2s + var(--d,0s)*5) infinite,glance calc(7s + var(--d,0s)*6) ease-in-out infinite;animation-delay:calc(var(--d,0s)*-7),calc(var(--d,0s)*-9)}
-@keyframes blink{0%,91%,100%{scale:1 1}95%{scale:1 .08}}
+.sw{position:absolute;left:0;top:0;width:100%;height:100%;animation:bob 2.6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-4.5%)}}
+.sh{position:absolute;left:0;top:0;width:100%;height:100%;transform-origin:50% 47%;transition:transform .5s;animation:sway calc(4.2s + var(--d,0s)*5) ease-in-out infinite;animation-delay:calc(var(--d,0s)*-9)}
+@keyframes sway{0%,100%{rotate:0deg;translate:0 0}22%{rotate:-4deg;translate:-2.5% 0}45%{rotate:1deg;translate:0 -2%}70%{rotate:4.5deg;translate:2.5% 0}}
+.se{transform-origin:center;transition:transform .3s;animation:blink calc(2.6s + var(--d,0s)*4) infinite,glance calc(7s + var(--d,0s)*6) ease-in-out infinite;animation-delay:calc(var(--d,0s)*-7),calc(var(--d,0s)*-9)}
+@keyframes blink{0%,86%,100%{scale:1 1}90%,94%{scale:1 .05}}
 @keyframes glance{0%,38%,100%{translate:0 0}46%,58%{translate:70% 0}70%,82%{translate:-70% 0}}
 .sx-phone,.sx-hands{display:none;position:absolute}
 .sx-phone{border-radius:2px;background:linear-gradient(135deg,#bfe6ff,#4aa3ff);box-shadow:0 0 .8cqw .2cqw rgba(120,190,255,.85)}
@@ -151,7 +151,7 @@ details.demo summary{cursor:pointer;min-height:24px}
 .rb.board{background:#0e1410;color:#7dff8f;font-family:ui-monospace,Menlo,monospace;border:2px solid #4a4f55;box-shadow:0 0 1cqw rgba(125,255,143,.35)}
 .rb.board::after{border-top-color:#0e1410}
 @keyframes zf{50%{transform:translate(-50%,-112%)}}
-.room[data-state="SLOW"] #rb-A,.room[data-state="SLOW"] #rb-C,.room[data-state="HESITANT"] #rb-D,.room[data-state="HESITANT"] #rb-E,.room[data-state="FAST"] #rb-F,#rb-B.show{opacity:1}
+.room[data-state="SLOW"] #rb-A,.room[data-state="HESITANT"] #rb-E,#rb-B.show,#rb-say.show{opacity:1}
 .room[data-state="SLOW"] #s-A .sh{transform:rotate(26deg) translateY(8%)}
 .room[data-state="SLOW"] #s-A .se{transform:scaleY(.12)}
 .room[data-state="SLOW"] #s-C .sx-phone{display:block}
@@ -174,29 +174,34 @@ details.demo summary{cursor:pointer;min-height:24px}
 .pbub{position:absolute;left:92%;top:-2%;padding:.5cqw .9cqw;border-radius:.9cqw;background:#fff;color:#1b2430;font-size:max(10px,1.2cqw);white-space:nowrap;box-shadow:0 3px 10px rgba(0,0,0,.3);opacity:0;transition:opacity .3s}
 .pbub.on{opacity:1}
 .pg{transition:transform .4s}
-.plid{transform-box:fill-box;transform-origin:50% 0;transform:scaleY(0);animation:lid 5s infinite}
-@keyframes lid{0%,92%,100%{transform:scaleY(0)}95%{transform:scaleY(1)}}
-.prof-fig{animation:psway 7s ease-in-out infinite}
-@keyframes psway{0%,100%{rotate:0deg}50%{rotate:.9deg}}
+.plid{transform-box:fill-box;transform-origin:50% 0;transform:scaleY(0);animation:lid 3.4s infinite}
+@keyframes lid{0%,86%,100%{transform:scaleY(0)}90%,94%{transform:scaleY(1)}}
+.prof-fig{animation:psway 5s ease-in-out infinite}
+@keyframes psway{0%,100%{rotate:0deg;translate:0 0}30%{rotate:-1.6deg;translate:-.5% 0}65%{rotate:1.8deg;translate:.6% 0}}
 .prof-tap{animation:tap 5s infinite}
 @keyframes tap{0%,78%,100%{translate:0 0}82%{translate:0 -1.2px}86%{translate:0 0}90%{translate:0 -1.2px}94%{translate:0 0}}
 @media (prefers-reduced-motion:reduce){.sh,.se,.plid,.prof-fig,.prof-tap{animation:none!important}}
-.phand,.pmag,.ppen,.psmile{display:none}
+.pmag,.ppen,.psmile,.pflat{display:none}
+.room[data-state="MEH"] .pflat{display:block}
+.room[data-state="MEH"] #mouth{display:none}
+.room[data-state="MEH"] .plid{animation:none;transform:scaleY(.4)}
 .room[data-state="SLOW"] .pg{transform:translateY(3px)}
-.room[data-state="SLOW"] .phand{display:block}
-.room[data-state="FAST"] .prof-fig{transform:translate(1.4cqw,.3cqw) scale(1.1)}
 .room[data-state="FAST"] .pmag{display:block}
 .room[data-state="HESITANT"] .ppen{display:block;animation:clk .5s ease-in-out infinite}
 @keyframes clk{50%{transform:translateY(-3px)}}
 .room[data-state="EXCELLENT"] .psmile{display:block}
+.room[data-state="GOOD"] .psmile{display:block;transform-box:fill-box;transform-origin:center;transform:scale(.6)}
+.room[data-state="GOOD"] #mouth{display:none}
+.room[data-state="GOOD"] .sh{animation:nod3 2.2s ease-in-out infinite;animation-delay:var(--d,0s)}
+@keyframes nod3{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(2.5%) rotate(2deg)}}
 .room[data-state="EXCELLENT"] #mouth{display:none}
 .prof-talk #mouth{animation:talk .28s infinite alternate}
 @keyframes talk{from{transform:scaleY(.4)}to{transform:scaleY(1.5)}}
 #mouth{transform-box:fill-box;transform-origin:center}
-#profHead{transform-box:fill-box;transform-origin:50% 100%;animation:nod 8s ease-in-out infinite}
-@keyframes nod{0%,58%,100%{transform:rotate(0)}64%{transform:rotate(5deg)}70%{transform:rotate(0)}76%{transform:rotate(4deg)}82%{transform:rotate(0)}}
-.prof-body{animation:breathe 4s ease-in-out infinite}
-@keyframes breathe{50%{transform:translateY(-1px)}}
+#profHead{transform-box:fill-box;transform-origin:50% 100%;animation:nod 6s ease-in-out infinite}
+@keyframes nod{0%,100%{transform:rotate(0)}15%{transform:rotate(-5deg)}30%{transform:rotate(0)}58%{transform:rotate(6deg)}66%{transform:rotate(0)}76%{transform:rotate(5deg)}84%{transform:rotate(0)}}
+.prof-body{animation:breathe 3s ease-in-out infinite}
+@keyframes breathe{50%{transform:translateY(-2.2px)}}
 
 /* 진단 */
 .cols2{display:flex;flex-wrap:wrap;gap:20px;align-items:stretch;margin-top:20px}
@@ -334,6 +339,8 @@ details.demo summary{cursor:pointer;min-height:24px}
       <button class="chip" data-f="SLOW" aria-pressed="false">지루함</button>
       <button class="chip" data-f="HESITANT" aria-pressed="false">버벅임</button>
       <button class="chip" data-f="FAST" aria-pressed="false">속사포</button>
+      <button class="chip" data-f="MEH" aria-pressed="false">그저 그런</button>
+      <button class="chip" data-f="GOOD" aria-pressed="false">괜찮은</button>
       <button class="chip" data-f="EXCELLENT" aria-pressed="false">완벽</button>
       <button class="chip" data-f="" aria-pressed="true">자동</button>
       <button class="chip" id="sndBtn" aria-pressed="true">효과음 켜짐</button>
@@ -489,7 +496,7 @@ function buildHall(){
   const hairs=["#2a211d","#3b2c23","#1c1816","#5a3d2a","#7a5a3a"];
   const spec=[[348,.22,300],[366,.30,380],[388,.40,480],[416,.55,620],[452,.74,820],[500,1,1060]];
   const at={}; Object.entries(SPECIAL).forEach(([k,v])=>at[v.join(",")]=k);
-  const anch={}; let rows="";
+  const anch={}, crowd=[]; let rows="";
   spec.forEach(([y,s,w],ri)=>{
     const cw=56*s, ch=62*s, topH=9*s, dh=30*s, g=40*s, riserH=ri===5?30:12*s;
     const deskY=ch*.74, fasY=deskY+topH, total=fasY+dh+riserH;
@@ -521,7 +528,7 @@ function buildHall(){
             `<div style="position:absolute;left:${u(hx+hd*.4)};top:${u(hy+hd*.82)};width:${u(hd*.2)};height:${u(hd*.07)};border-radius:0 0 ${u(hd*.2)} ${u(hd*.2)};background:#b9645b;opacity:.85"></div>`+
             `</div>${ex}</div></div>`;
         }
-        if(sp) anch[sp]={x:rowLeft+x+(j+.5)*bw/n, y:rowTop+hy, hd};
+        if(sp) anch[sp]={x:rowLeft+x+(j+.5)*bw/n, y:rowTop+hy, hd}; else if(occ) crowd.push({x:rowLeft+x+(j+.5)*bw/n, y:rowTop+hy, hd});
         chairs+=`<div style="position:relative;flex:none;width:${u(cw)};height:${u(ch)};border-radius:${u(cw*.24)} ${u(cw*.24)} ${u(cw*.05)} ${u(cw*.05)};background:linear-gradient(180deg,#f0a561 0%,#d17a3a 55%,#b45f27 100%);box-shadow:inset 0 ${u(ch*.04)} 0 rgba(255,255,255,.35),inset 0 ${u(-ch*.1)} ${u(ch*.12)} rgba(60,25,5,.35)">${inner}</div>`;
       }
       blocks+=`<div style="position:absolute;left:${u(x)};top:0;width:${u(bw)};height:${u(fasY+dh)}">`+
@@ -535,7 +542,7 @@ function buildHall(){
       :`left:0;right:0;top:${u(fasY+dh)};height:${u(riserH)};background:linear-gradient(180deg,#575c64,#737880);box-shadow:inset 0 ${u(3*s)} ${u(4*s)} rgba(0,0,0,.35)`;
     rows+=`<div style="position:absolute;left:50%;transform:translateX(-50%);top:${u(rowTop)};width:${u(w)};height:${u(total)}"><div style="position:absolute;${riser}"></div>${blocks}</div>`;
   });
-  return {rows,anch};
+  return {rows,anch,crowd};
 }
 const HALL_BG=`<svg class="bg" viewBox="0 0 1180 640" preserveAspectRatio="none" aria-hidden="true"><defs>
 <linearGradient id="ceil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b9bec5"/><stop offset=".6" stop-color="#d9dde1"/><stop offset="1" stop-color="#eceff2"/></linearGradient>
@@ -595,8 +602,8 @@ const PROF=`<div class="prof" id="prof" style="left:6.2cqw;bottom:1cqw;width:12.
 <circle cx="-5" cy="1" r="1.1" fill="#222"/><circle cx="5" cy="1" r="1.1" fill="#222"/>
 <ellipse class="plid" cx="-5" cy="1" rx="3.7" ry="3.2" fill="#f0c7a2"/><ellipse class="plid" cx="5" cy="1" rx="3.7" ry="3.2" fill="#f0c7a2"/>
 <ellipse id="mouth" cx="0" cy="8" rx="3.5" ry="1.4" fill="#7a2f2f"/>
+<path class="pflat" d="M-3.8 8 h7.6" fill="none" stroke="#7a2f2f" stroke-width="1.6" stroke-linecap="round"/>
 <path class="psmile" d="M-4.5 6.5 q4.5 6 9 0" fill="none" stroke="#7a2f2f" stroke-width="1.6" stroke-linecap="round"/>
-<g class="phand"><circle cx="9" cy="-10" r="5.5" fill="#f0c7a2" stroke="#d9a982" stroke-width=".6"/><path d="M4 -12 q4 -4 9 0" fill="none" stroke="#d9a982" stroke-width=".7"/></g>
 <g class="pmag"><circle cx="11" cy="2" r="8" fill="rgba(190,225,255,.4)" stroke="#6b5a3a" stroke-width="2"/><line x1="17" y1="8" x2="26" y2="19" stroke="#6b5a3a" stroke-width="3" stroke-linecap="round"/></g>
 </g>
 </svg></div>`;
@@ -604,7 +611,8 @@ function room(id){
   const h=buildHall(), a=h.anch;
   const tip=(k,cls,txt)=>`<div class="rb ${cls}" id="rb-${k}" style="left:${(a[k].x/11.8).toFixed(3)}cqw;top:${((a[k].y-a[k].hd*.25)/11.8).toFixed(3)}cqw">${txt}</div>`;
   const layer=id==="room1"
-    ? tip("A","z","zZz")+tip("B","","😅 …(조용히 복귀)")+tip("C","","3관 강의실 발표 멸망 중 ㅋㅋㅋ")+tip("D","","오늘 안에 끝나냐?")+tip("E","board","")+tip("F","","지금 랩함?") : "";
+    ? tip("A","z","zZz")+tip("B","","")+tip("E","board","")+`<div class="rb" id="rb-say"></div>` : "";
+  if(id==="room1") R.crowd=h.crowd;
   const me=id==="room1"?"":`<div class="me"><span>나</span><video autoplay muted playsinline></video></div>`;
   $(id).dataset.state="";
   $(id).innerHTML=HALL_BG+h.rows+layer+PROF+`<div class="bubble" id="bub_${id}"><small></small><span></span></div>`+me;
@@ -861,6 +869,28 @@ const penClick=()=>{ tone(2400,.03,"square",.05); tone(1500,.04,"square",.04,.07
 const etaPing=()=>{ tone(880,.12,"sine",.07); tone(1320,.18,"sine",.07,.12); };
 
 /* ---------- 강의실 실시간 반응 ---------- */
+/* 반응마다 문구 2개 중 랜덤. 말하는 학생도 매번 바뀜 */
+const TXT={
+  SLOW:{say:["3관 강의실 발표 멸망 중 ㅋㅋㅋ","아 졸려… 언제 끝나?"],eta:["실시간 3관 발표자 정지버튼 누름? ㅋㅋㅋ","에타 3관 발표 지금 자는 사람 나뿐?"]},
+  HESITANT:{say:["오늘 안에 끝나냐?","발표자 괜찮은 거 맞죠?"],prof:["자료 숙지가 안 되었나?","준비를 더 하고 오지 그랬나…"],board:[(w,n)=>`"${w}..." ${n}회 달성!`,(w,n)=>`${w} 또 나왔다 ${n}번째 ㅋㅋ`]},
+  FAST:{say:["지금 랩함?","잠깐, 방금 뭐라고?"]},
+  GOOD:{say:["오, 꽤 괜찮은데?","나쁘지 않다, 집중해서 듣게 되네"]},
+  MEH:{say:["음… 그냥 그렇네","나쁘진 않은데 인상적이진 않아"]},
+  EXCELLENT:{say:["오… 발표 잘한다","이거 A+ 각인데?"]},
+  BACK:["😅 …(조용히 복귀)","😳 (슬금슬금 자리로…)"]
+};
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+/* 발표자료(오른쪽)·교수님(왼쪽)·대시보드와 겹치지 않는 자리 중, 왼쪽 중간 학생을 우선해서 고른다 */
+function pickSpeaker(){
+  const c=(R.crowd||[]).map(p=>({p,x:p.x/11.8})).filter(o=>o.x>=30&&o.x<=56&&o!==R.lastSpk);
+  if(!c.length) return null;
+  const left=c.filter(o=>o.x<=44), pool=(left.length&&Math.random()<.75)?left:c;
+  const o=pick(pool.filter(o=>o.p!==R.lastSpk).length?pool.filter(o=>o.p!==R.lastSpk):pool); R.lastSpk=o.p; return o.p;
+}
+function studentSay(text){
+  const el=$("rb-say"), p=pickSpeaker(); if(!el||!p||!text){ if(el) el.classList.remove("show"); return; }
+  el.textContent=text; el.style.left=(p.x/11.8).toFixed(3)+"cqw"; el.style.top=((p.y-p.hd*.25)/11.8).toFixed(3)+"cqw"; el.classList.add("show");
+}
 /* 말 속도·정적·군더더기어로 5개 상태 중 하나를 고른다(2초마다 확인). */
 function computeState(now){
   const el=(now-S.t0)/1000;
@@ -872,8 +902,9 @@ function computeState(now){
   if(f5>=3) return "HESITANT";
   if(cpm>450) return "FAST";
   if(cpm>=300&&cpm<=380&&f10===0&&silence<3&&recent.length>=2) return "EXCELLENT";
+  if(cpm>=250&&cpm<=420&&f10<=1&&silence<3&&recent.length>=2) return "GOOD";
   if(silence>=3||cpm<200) return "SLOW";
-  return "NORMAL";
+  return "MEH";
 }
 function showEta(text){
   $("etaTxt").textContent=text; $("eta").classList.add("show"); etaPing();
@@ -881,24 +912,25 @@ function showEta(text){
 }
 function updateBoard(){
   const top=Object.entries(R.fillWords).sort((a,b)=>b[1]-a[1])[0];
-  $("rb-E").textContent=`"${top?top[0]:"음"}..." ${R.fillTotal}회 달성!`;
+  $("rb-E").textContent=(R.boardFmt||(R.boardFmt=pick(TXT.HESITANT.board)))(top?top[0]:"음",R.fillTotal);
 }
 function setState(s){
   const rm=$("room1"); if(!rm||!rm.querySelector(".prof")) return;
   R.state=s; R.changedAt=Date.now(); rm.dataset.state=s;
   rm.classList.remove("quiet"); clearTimeout(R.quietT); R.quietT=setTimeout(()=>rm.classList.add("quiet"),3000); /* 반응 텍스트는 3초만 */
-  const B={SLOW:"🤦",HESITANT:"🖊️ 딸깍",FAST:"🔍",EXCELLENT:"✨ A+ ✨",NORMAL:""};
+  const B={SLOW:"🤦",HESITANT:"🖊️ 딸깍",FAST:"🔍",MEH:"😐",GOOD:"🙂",EXCELLENT:"✨ A+ ✨",NORMAL:""};
   $("pbadge").textContent=B[s]; $("pbadge").classList.toggle("on",!!B[s]);
-  $("pbub").textContent=s==="HESITANT"?"자료 숙지가 안 되었나?":""; $("pbub").classList.toggle("on",s==="HESITANT");
+  $("pbub").textContent=s==="HESITANT"?pick(TXT.HESITANT.prof):""; $("pbub").classList.toggle("on",s==="HESITANT");
   clearTimeout(R.escT); clearInterval(R.penT);
+  studentSay(TXT[s]?pick(TXT[s].say):"");
   const sB=$("s-B");
   if(s==="SLOW"){
     R.escT=setTimeout(()=>{ if(R.state==="SLOW"){ sB.classList.add("gone"); R.escaped=true; } },900);
-    showEta("실시간 3관 발표자 정지버튼 누름? ㅋㅋㅋ");
+    showEta(pick(TXT.SLOW.eta));
   }
-  if(s==="HESITANT"){ updateBoard(); penClick(); let n=0; R.penT=setInterval(()=>{ if(R.state!=="HESITANT"||++n>3){ clearInterval(R.penT); return; } penClick(); },1200); }
+  if(s==="HESITANT"){ R.boardFmt=pick(TXT.HESITANT.board); updateBoard(); penClick(); let n=0; R.penT=setInterval(()=>{ if(R.state!=="HESITANT"||++n>3){ clearInterval(R.penT); return; } penClick(); },1200); }
   if(s==="EXCELLENT"&&R.escaped){
-    R.escaped=false; sB.classList.remove("gone"); sB.classList.add("sheepish"); $("rb-B").classList.add("show");
+    R.escaped=false; sB.classList.remove("gone"); sB.classList.add("sheepish"); $("rb-B").textContent=pick(TXT.BACK); $("rb-B").classList.add("show");
     setTimeout(()=>{ sB.classList.remove("sheepish"); $("rb-B").classList.remove("show"); },3000);
   }
 }
