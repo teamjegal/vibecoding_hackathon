@@ -75,6 +75,7 @@ input[type=text]{width:100%;height:56px;padding:0 16px;border:0;border-radius:14
 .dcell{display:flex;flex-direction:column;gap:5px;min-width:116px;padding:8px 18px}
 .dl{display:flex;align-items:center;gap:6px;font-size:12px;color:#aeb8c4}
 .dl .tg{margin-left:auto;font-size:11px}
+#mElapsedTag{display:none;color:#aeb8c4}
 .dl .rd{width:7px;height:7px;border-radius:50%;background:#ff5a4d;box-shadow:0 0 0 3px rgba(255,90,77,.3)}
 .dv{display:flex;align-items:baseline;gap:5px;font-size:22px;line-height:1.1;font-variant-numeric:tabular-nums}
 .dv small{font-size:12px;color:#aeb8c4}
@@ -96,7 +97,9 @@ input[type=text]{width:100%;height:56px;padding:0 16px;border:0;border-radius:14
 .snav.l{left:6px}.snav.r{right:6px}
 .dock-script{width:100%;background:rgba(255,253,244,.97);color:#2a2a2a;border:1px solid #e6dfc0;border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,.3);overflow:hidden}
 .dock-script[hidden]{display:none}
-.ds-h{display:flex;justify-content:space-between;gap:8px;font-size:max(10px,.95cqw);color:#7a6f45;padding:3px 8px;border-bottom:1px solid #e6dfc0}
+.dsnav{display:flex;gap:4px;margin-left:auto}
+.dsnav button{min-width:44px;height:32px;border:0;border-radius:8px;background:#efe8c8;color:#5b5230;font-size:20px;line-height:1;cursor:pointer}
+.ds-h{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:max(10px,.95cqw);color:#7a6f45;padding:3px 8px;border-bottom:1px solid #e6dfc0}
 .ds-b{padding:5px 9px;font-size:max(11px,1.2cqw);line-height:1.5;max-height:7.6cqw;overflow:auto;white-space:pre-wrap}
 .dock-cam{position:relative;width:62%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:#0b0c10;box-shadow:0 6px 18px rgba(0,0,0,.4),0 0 0 1.5px rgba(255,255,255,.85)}
 .dock-cam video{width:100%;height:100%;object-fit:cover;transform:scaleX(-1)}
@@ -235,6 +238,71 @@ details.demo summary{cursor:pointer;min-height:24px}
 .goal .gt{margin-top:6px;font-size:21px;letter-spacing:-.02em}
 .goal .fd{margin-top:4px;font-size:15px;color:var(--sub)}
 .col{display:flex;flex-direction:column;gap:20px}
+
+/* 폰 화면(좁은 화면): 한 칸으로 쌓고, 발표 화면은 강의실 위·지표·자료 아래 순서로 */
+@media (max-width:720px){
+  main{padding:28px 16px 40px}
+  main.stage{padding:12px 12px 120px}
+  h1{font-size:26px}
+  .head{margin-bottom:22px}
+  .head p{font-size:15px}
+  .card{padding:20px 16px;border-radius:20px}
+  .col-side{position:static;flex:1 1 100%;min-width:0}
+  .col-main{flex:1 1 100%}
+  .fields{gap:16px}
+  #timeRow .chip{min-height:48px;padding:0 14px}
+  .tiles .chip{flex:1 1 100%;min-height:0}
+  .cta{min-height:56px}
+  /* 발표·질의응답 */
+  .roomwrap{display:flex;flex-direction:column;gap:10px;overflow:visible;box-shadow:none;border-radius:0;background:transparent}
+  .room{border-radius:16px;box-shadow:0 6px 20px rgba(25,31,40,.18)}
+  .rb{font-size:max(9px,2.6cqw)}
+  .rb.z{font-size:max(11px,3.4cqw)}
+  .pbadge{font-size:max(14px,4.4cqw)}
+  .pbub{font-size:max(9px,2.4cqw)}
+  .bubble{left:3%;right:3%;top:auto;bottom:3%;transform:none;max-width:none;padding:10px 12px;border-radius:12px}
+  .bubble::before{display:none}
+  .bubble span{font-size:14px;line-height:1.5}
+  .bubble small{font-size:11px}
+  .qchip{position:static;align-self:flex-start;font-size:13px;padding:6px 14px}
+  .dash{position:static;transform:none;width:100%;max-width:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:0;border-radius:12px}
+  .ddiv{display:none}
+  .dcell{min-width:0;display:grid;grid-template-columns:auto 1fr;align-items:baseline;column-gap:4px;row-gap:5px;padding:6px 8px}
+  .dl{font-size:10px;white-space:nowrap;gap:0}
+  .dl .rd{display:none}
+  .dl .tg{margin-left:4px;font-size:10px}
+  #mElapsedTag{display:inline}
+  .dl .lg{display:none}
+  .dv{justify-self:end;font-size:10px;white-space:nowrap;color:#aeb8c4}
+  .dv small{font-size:10px}
+  .dash>.dcell:nth-child(1) .dv,.dash>.dcell:nth-child(3) .dv{display:none}
+  .dash>.dcell:nth-child(5) .tg,.dash>.dcell:nth-child(7) .tg{display:none}
+  .dbar{grid-column:1/-1;height:4px;border-radius:2px}
+  .dbar i{border-radius:2px}
+  .dock{display:contents}
+  .roomwrap>.room{order:0}
+  .dash{order:2}
+  .dock-script{order:3}
+  .dock-h{font-size:12px}
+  .ds-h{font-size:12px;padding:5px 10px}
+  .ds-b{font-size:17px;line-height:1.6;max-height:220px}
+  /* 강의실 크기는 그대로, 오른쪽 위에 내 카메라, 오른쪽 아래에 발표 자료를 겹쳐 둔다 */
+  .dock-cam{position:absolute;right:8px;top:8px;width:28%;aspect-ratio:16/9;height:auto;z-index:10;border-radius:8px}
+  .dock-slide{position:absolute;right:8px;top:calc(29.49cqw - 25px);width:44%;z-index:10;border-radius:8px}
+  .dock-slide .dock-h{padding:2px 8px;font-size:10px}
+  .snav{width:28px;height:28px;margin-top:-14px}
+  .dock-cam span{font-size:10px;padding:1px 6px;left:4px;top:3px}
+  .me{right:3%;bottom:3%;width:30%;min-width:96px;border-width:1.5px}
+  .ctl{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));transform:none;justify-content:space-between;padding:8px;z-index:30}
+  .ctl .endbtn,.ctl .micbtn{flex:1;min-height:52px;justify-content:center}
+  .hudnote{position:fixed;left:12px;right:12px;bottom:calc(84px + env(safe-area-inset-bottom));transform:none;max-width:none;font-size:13px;z-index:30}
+  details.demo{padding:10px 12px}
+  .eta{right:12px;bottom:92px}
+  /* 진단 */
+  .hero{padding:22px 18px;gap:24px}
+  .score .num{font-size:60px}
+  .cols2>.big,.cols2>.side{flex:1 1 100%}
+}
 </style>
 </head>
 <body>
@@ -306,7 +374,7 @@ details.demo summary{cursor:pointer;min-height:24px}
   <div class="roomwrap">
     <div class="room" id="room1"></div>
     <div class="dash" role="group" aria-label="발표 현황">
-      <div class="dcell"><div class="dl"><span class="rd"></span>경과 시간</div><div class="dv"><span id="elapsed">00:00</span><small id="target">/ 5:00</small></div><div class="dbar"><i id="barElapsed" style="background:#4d9bff"></i></div></div>
+      <div class="dcell"><div class="dl"><span class="rd"></span>경과<span class="lg"> 시간</span><span class="tg" id="mElapsedTag"></span></div><div class="dv"><span id="elapsed">00:00</span><small id="target">/ 5:00</small></div><div class="dbar"><i id="barElapsed" style="background:#4d9bff"></i></div></div>
       <div class="ddiv" aria-hidden="true"></div>
       <div class="dcell"><div class="dl">말 속도<span class="tg" id="mSpeedTag"></span></div><div class="dv"><span id="mSpeed">-</span><small>자/분</small></div><div class="dbar dgauge"><i id="gaugeMark"></i></div></div>
       <div class="ddiv" aria-hidden="true"></div>
@@ -322,7 +390,7 @@ details.demo summary{cursor:pointer;min-height:24px}
         <button class="snav r" id="next" aria-label="다음 슬라이드"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
       </div>
       <div class="dock-script" id="scriptPanel" hidden>
-        <div class="ds-h"><span>대본</span><span id="scriptTag"></span></div>
+        <div class="ds-h"><span>대본</span><span id="scriptTag"></span><span class="dsnav"><button id="sprev" type="button" aria-label="이전 대본">‹</button><button id="snext" type="button" aria-label="다음 대본">›</button></span></div>
         <div class="ds-b" id="scriptBody"></div>
       </div>
       <div class="dock-cam"><span>나</span><video autoplay muted playsinline></video></div>
@@ -802,6 +870,11 @@ async function renderSlide(){
 }
 $("prev").onclick=()=>{S.idx=Math.max(0,S.idx-1);renderSlide()};
 $("next").onclick=()=>{S.idx=Math.min((S.slides.length||DEMO.length)-1,S.idx+1);renderSlide()};
+/* 대본을 넘기면 발표 자료도 같이 넘어간다 (대본 칸의 ‹ › 버튼, 좌우로 밀기) */
+$("sprev").onclick=()=>$("prev").click(); $("snext").onclick=()=>$("next").click();
+{ let x0=null; const sb=$("scriptBody");
+  sb.addEventListener("touchstart",e=>{ x0=e.touches[0].clientX; },{passive:true});
+  sb.addEventListener("touchend",e=>{ if(x0===null) return; const dx=e.changedTouches[0].clientX-x0; x0=null; if(Math.abs(dx)>50) $(dx<0?"next":"prev").click(); },{passive:true}); }
 document.addEventListener("keydown",e=>{ if($("s2").classList.contains("on")){ if(e.key==="ArrowRight")$("next").click(); if(e.key==="ArrowLeft")$("prev").click(); }});
 
 /* ---------- 음성 인식 · 소리 ---------- */
@@ -974,7 +1047,8 @@ function renderNote(){
 }
 function tick(){
   const now=Date.now(), sec=Math.floor((now-S.t0)/1000);
-  $("elapsed").textContent=mmss(sec); $("barElapsed").style.width=Math.min(100,sec/(S.minutes*60)*100)+"%";
+  $("elapsed").textContent=mmss(sec); { const left=S.minutes*60-sec; $("mElapsedTag").textContent=left>=0?mmss(left):"+"+mmss(-left);
+    $("barElapsed").style.background=left<0?"#ff4d4f":left<=30?"#ffcc33":"#4d9bff"; }  /* 30초 이내 노랑, 넘으면 빨강 */ $("barElapsed").style.width=Math.min(100,sec/(S.minutes*60)*100)+"%";
   const lv=readLevel(); R.level=lv; if(lv>.025){ R.lastSound=now; R.lastLoud=now; }
   paintLevel("lvl",lv);
   const st=stats();
@@ -1009,7 +1083,7 @@ function startGaze(){
 function resetRun(){
   R.finals=[]; R.fills=[]; R.fillTotal=0; R.fillWords={}; R.escaped=false; R.state="NORMAL"; R.changedAt=Date.now(); R.lastSound=Date.now(); R.lastResult=Date.now(); R.lastLoud=0; R.vs=null; R.gzWarn="";
   S.recErr="";
-  $("mSpeed").textContent="-"; $("mFill").textContent="0"; $("mGaze").textContent="-"; $("elapsed").textContent="00:00";
+  $("mSpeed").textContent="-"; $("mFill").textContent="0"; $("mGaze").textContent="-"; $("elapsed").textContent="00:00"; $("mElapsedTag").textContent=""; $("barElapsed").style.background="#4d9bff";
   ["mSpeedTag","mFillTag","mGazeTag"].forEach(id=>$(id).textContent="");
   ["barElapsed","barFill","barGaze"].forEach(id=>$(id).style.width="0"); $("gaugeMark").style.left="0";
   $("hudNote").style.display="none"; $("lvl").className="lvl";
