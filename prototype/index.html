@@ -90,9 +90,6 @@ input[type=text]{width:100%;height:56px;padding:0 16px;border:0;border-radius:14
 .slide{aspect-ratio:16/9;background:#fff;color:#111;position:relative;overflow:hidden;container-type:inline-size}
 .slide canvas,.slide img{width:100%;height:100%;object-fit:contain;background:#fff;display:block}
 .slide iframe{width:100%;height:100%;border:0;background:#fff}
-.demo-slide{padding:7cqw 9cqw;height:100%;display:flex;flex-direction:column;justify-content:center;gap:3cqw}
-.demo-slide h3{font-size:7cqw;margin:0;letter-spacing:-.02em}
-.demo-slide ul{margin:0;padding-left:5cqw;font-size:4.2cqw;line-height:1.7;color:#333b47}
 .snav{position:absolute;top:50%;width:44px;height:44px;margin-top:-22px;border:0;border-radius:50%;background:rgba(27,36,48,.5);color:#fff;cursor:pointer;display:grid;place-items:center;z-index:2}
 .snav.l{left:6px}.snav.r{right:6px}
 .dock-script{width:100%;background:rgba(255,253,244,.97);color:#2a2a2a;border:1px solid #e6dfc0;border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,.3);overflow:hidden}
@@ -124,11 +121,6 @@ input[type=text]{width:100%;height:56px;padding:0 16px;border:0;border-radius:14
 .bubble.on{display:block}
 .bubble small{display:block;color:var(--sub);font-size:12px;margin-bottom:4px;position:relative}
 .bubble span{font-size:17px;line-height:1.55;position:relative}
-details.demo{margin-top:12px;padding:10px 16px;border-radius:14px;background:#fff;box-shadow:var(--shadow);font-size:13px;color:var(--sub)}
-details.demo summary{cursor:pointer;min-height:24px}
-.tools{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:10px}
-.tools .chip{padding:6px 14px;min-height:36px;border:0;border-radius:99px;background:var(--bg);color:var(--ink);font-size:13px;cursor:pointer}
-.tools .chip[aria-pressed="true"]{background:var(--soft);color:var(--brand)}
 
 /* 에타 피드 알림 */
 .eta{position:fixed;right:22px;bottom:22px;z-index:50;width:min(320px,calc(100vw - 44px));background:#fff;color:#1b2430;border-radius:14px;box-shadow:0 12px 32px rgba(0,0,0,.3);border-left:5px solid #d9381e;padding:10px 14px;transform:translateY(calc(100% + 40px));opacity:0;pointer-events:none;transition:transform .35s cubic-bezier(.2,.8,.2,1),opacity .25s}
@@ -296,8 +288,7 @@ details.demo summary{cursor:pointer;min-height:24px}
   .ctl{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));transform:none;justify-content:space-between;padding:8px;z-index:30}
   .ctl .endbtn,.ctl .micbtn{flex:1;min-height:52px;justify-content:center}
   .hudnote{position:fixed;left:12px;right:12px;bottom:calc(84px + env(safe-area-inset-bottom));transform:none;max-width:none;font-size:13px;z-index:30}
-  details.demo{padding:10px 12px}
-  .eta{right:12px;bottom:92px}
+    .eta{right:12px;bottom:92px}
   /* 진단 */
   .hero{padding:22px 18px;gap:24px}
   .score .num{font-size:60px}
@@ -308,7 +299,7 @@ details.demo summary{cursor:pointer;min-height:24px}
 <body>
 <main id="m1">
 <section class="screen on" id="s1">
-  <div class="head"><h1>발표 연습, 지금 시작해 볼까요?</h1><p>자료와 교수님을 고르고 카메라를 확인하면 바로 시작할 수 있어요. 자료가 없어도 데모 슬라이드로 체험해 볼 수 있어요.</p></div>
+  <div class="head"><h1>발표 연습, 지금 시작해 볼까요?</h1><p>발표 자료를 올리고 교수님을 고른 다음 카메라를 확인하면 시작할 수 있어요.</p></div>
   <div class="cols">
     <div class="col-main">
       <div class="row2">
@@ -358,11 +349,12 @@ details.demo summary{cursor:pointer;min-height:24px}
       </section>
       <section class="card">
         <h2>연습 요약</h2>
-        <div class="sumrow"><span>자료</span><b id="sumFile">데모 슬라이드</b></div>
+        <div class="sumrow"><span>자료</span><b id="sumFile">아직 없어요</b></div>
         <div class="sumrow"><span>대본</span><b id="sumScript">없음</b></div>
         <div class="sumrow"><span>시간</span><b id="sumTime">5분</b></div>
         <div class="sumrow"><span>교수님</span><b id="sumProf">꼼꼼한 교수님</b></div>
-        <button class="cta" id="startBtn">발표 시작하기</button>
+        <button class="cta" id="startBtn" disabled>발표 시작하기</button>
+        <p class="note" id="startHint">발표 자료를 올리면 시작할 수 있어요.</p>
       </section>
     </aside>
   </div>
@@ -401,19 +393,6 @@ details.demo summary{cursor:pointer;min-height:24px}
       <button class="endbtn" id="endBtn">발표 끝내기</button>
     </div>
   </div>
-  <details class="demo">
-    <summary>강의실 반응 미리보기 · 효과음</summary>
-    <div class="tools">
-      <button class="chip" data-f="SLOW" aria-pressed="false">지루함</button>
-      <button class="chip" data-f="HESITANT" aria-pressed="false">버벅임</button>
-      <button class="chip" data-f="FAST" aria-pressed="false">속사포</button>
-      <button class="chip" data-f="MEH" aria-pressed="false">그저 그런</button>
-      <button class="chip" data-f="GOOD" aria-pressed="false">괜찮은</button>
-      <button class="chip" data-f="EXCELLENT" aria-pressed="false">완벽</button>
-      <button class="chip" data-f="" aria-pressed="true">자동</button>
-      <button class="chip" id="sndBtn" aria-pressed="true">효과음 켜짐</button>
-    </div>
-  </details>
 </section>
 </main>
 
@@ -548,11 +527,6 @@ const PERSONA = {
     "앞으로 한 가지만 더 발전시킨다면 무엇을 하고 싶나요?",
     "팀에서 본인이 가장 기여한 부분은 어디였나요?"]}
 };
-const DEMO = [
-  ["문제 정의","대학생은 발표 연습 기회가 부족하다","혼자 연습하면 피드백이 없다","실전 질의응답은 연습할 방법이 없다"],
-  ["해결 방법","카메라로 발표 태도를 분석","AI 교수님이 질문","발표 후 고칠 점 진단"],
-  ["기대 효과","발표 불안 감소","준비 시간 단축","누구나 같은 품질의 피드백"]
-];
 
 /* ---------- 강의실 (현실적 버전: 학생은 HTML, 교수님은 기존 그림 유지) ---------- */
 /* [줄, 덩어리, 자리] — 반응 연출에 쓰는 학생 A~F */
@@ -729,7 +703,8 @@ $("timeCustom").addEventListener("blur",e=>{
 });
 function updateSummary(){
   const set=(id,t)=>{ const e=$(id); if(e) e.textContent=t; };
-  set("sumFile",S.fileNames.length?S.fileNames.join(", "):"데모 슬라이드"); set("sumScript",S.scriptName||"없음");
+  set("sumFile",S.fileNames.length?S.fileNames.join(", "):"아직 없어요"); set("sumScript",S.scriptName||"없음");
+  const ok=S.slides.length>0, sb=$("startBtn"); if(sb&&!S.busy) sb.disabled=!ok; set("startHint",ok?"":(S.fileNames.length?"읽을 수 있는 자료가 없어요. PDF나 이미지로 올려 주세요.":"발표 자료를 올리면 시작할 수 있어요."));
   set("sumTime",S.minutes+"분"); set("sumProf",PERSONA[S.persona].label);
 }
 
@@ -835,9 +810,9 @@ function splitEven(text,n){
 async function prepareScript(){
   S.segs=null; $("scriptPanel").hidden=!S.scriptText;
   if(!S.scriptText) return;
-  const n=S.slides.length||DEMO.length, slides=[]; let imgs=0;
+  const n=S.slides.length, slides=[]; let imgs=0;
   for(let i=0;i<n;i++){
-    const s=S.slides[i], o={n:i+1,text:(S.slides.length?S.slideTexts[i]:DEMO[i].join(" / "))||""};
+    const s=S.slides[i], o={n:i+1,text:S.slideTexts[i]||""};
     if(s&&s.type==="img"&&imgs<20){ const b=await imgSmall(s.url); if(b){ o.image=b; imgs++; } }
     slides.push(o);
   }
@@ -854,11 +829,11 @@ function renderScript(){
   $("scriptBody").textContent=S.segs[S.idx]||"(이 슬라이드에 맞는 대본이 없어요)";
 }
 async function renderSlide(){
-  const box=$("slideBox"), n=S.slides.length||DEMO.length, tok=++S.rtok;
+  const box=$("slideBox"), n=S.slides.length, tok=++S.rtok;
   $("slideNo").textContent=(S.idx+1)+" / "+n;
-  $("slideCount").textContent=S.slides.length?"업로드 자료":"데모 자료";
+  $("slideCount").textContent="업로드 자료";
   renderScript();
-  if(!S.slides.length){ const d=DEMO[S.idx]; box.innerHTML=`<div class="demo-slide"><h3>${d[0]}</h3><ul>${d.slice(1).map(x=>`<li>${x}</li>`).join("")}</ul></div>`; return; }
+  if(!S.slides.length){ box.innerHTML=""; return; }
   const s=S.slides[S.idx];
   if(s.type==="page"){
     const cv=document.createElement("canvas"); box.innerHTML=""; box.appendChild(cv);
@@ -869,7 +844,7 @@ async function renderSlide(){
   else box.innerHTML=`<img src="${s.url}" alt="슬라이드 ${S.idx+1}">`;
 }
 $("prev").onclick=()=>{S.idx=Math.max(0,S.idx-1);renderSlide()};
-$("next").onclick=()=>{S.idx=Math.min((S.slides.length||DEMO.length)-1,S.idx+1);renderSlide()};
+$("next").onclick=()=>{S.idx=Math.min(S.slides.length-1,S.idx+1);renderSlide()};
 /* 대본을 넘기면 발표 자료도 같이 넘어간다 (대본 칸의 ‹ › 버튼, 좌우로 밀기) */
 $("sprev").onclick=()=>$("prev").click(); $("snext").onclick=()=>$("next").click();
 { let x0=null; const sb=$("scriptBody");
@@ -1011,12 +986,6 @@ function pingState(){
   const now=Date.now(), s=R.force||computeState(now);
   if(s!==R.state && (R.force||now-R.changedAt>=4000)) setState(s);
 }
-document.querySelector(".tools").addEventListener("click",e=>{
-  const b=e.target.closest(".chip"); if(!b) return;
-  if(b.id==="sndBtn"){ R.sound=!R.sound; b.setAttribute("aria-pressed",R.sound); b.textContent=R.sound?"효과음 켜짐":"효과음 꺼짐"; return; }
-  document.querySelectorAll(".tools .chip[data-f]").forEach(x=>x.setAttribute("aria-pressed",x===b));
-  R.force=b.dataset.f||null; setState(R.force||"NORMAL");
-});
 
 /* ---------- 발표 중 화면 갱신 ---------- */
 const FILL=new Set(["음","어","그","저","약간","뭐","이제","그니까","그러니까"]);
@@ -1089,13 +1058,13 @@ function resetRun(){
   $("hudNote").style.display="none"; $("lvl").className="lvl";
 }
 $("startBtn").onclick=async()=>{
+  if(!S.slides.length){ updateSummary(); return; }
   initAudio();
-  const b=$("startBtn"), ab=$("again"); b.disabled=true; ab.disabled=true; const label=b.textContent; b.textContent=S.scriptText?"대본을 슬라이드에 맞추는 중…":"준비 중…";
+  const b=$("startBtn"), ab=$("again"); S.busy=true; b.disabled=true; ab.disabled=true; const label=b.textContent; b.textContent=S.scriptText?"대본을 슬라이드에 맞추는 중…":"준비 중…";
   try{ await prepareScript(); }catch(e){}
-  b.disabled=false; ab.disabled=false; b.textContent=label;
+  S.busy=false; b.disabled=false; ab.disabled=false; b.textContent=label;
   $("room2").innerHTML=""; S.idx=0; S.transcript=""; S.target="speech"; S.t0=Date.now(); resetRun();
   room("room1"); $("target").textContent="/ "+S.minutes+":00";
-  document.querySelectorAll(".tools .chip[data-f]").forEach(x=>x.setAttribute("aria-pressed",x.dataset.f===""));
   R.force=null; await renderSlide(); go(2); startRec(); setupMeter(); startGaze();
   clearInterval(S.timer); clearInterval(R.ping); S.timer=setInterval(tick,500); R.ping=setInterval(pingState,2000); tick();
 };
@@ -1132,7 +1101,7 @@ async function api(path,payload,ms=60000){
 async function generateQuestions(){
   try{
     const d=await api("/api/questions",{persona:S.persona,topic:$("topic").value,minutes:S.minutes,transcript:S.transcript,
-      slideText:S.slides.length?S.slideTexts.filter(Boolean).join("\n").slice(0,6000):DEMO.map(s=>s.join(" / ")).join("\n")});
+      slideText:S.slideTexts.filter(Boolean).join("\n").slice(0,6000)});
     const qs=(d.questions||[]).map(q=>q.question).filter(Boolean);
     if(!qs.length) throw new Error("empty");
     S.aiQ=true; return qs.slice(0,2);
